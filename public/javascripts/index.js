@@ -5,9 +5,19 @@ $( document ).ready(function() {
   $.getJSON("/config.json", function (data) {
     console.log(data.upload_folder);
     window.folder_path = data.upload_folder;
+    window.download_path = data.download_file;
   });
 
 });
+
+function downloadFile() {
+  var url = '/downloadfile?downloadFile='+window.download_path;
+  var elem = document.createElement('a');
+  elem.href = url;
+  elem.download="test";
+  elem.target = 'hiddenIframe';
+  elem.click();
+}
 
 function uploadFile(event) {
   swal(
@@ -42,6 +52,7 @@ function uploadFile(event) {
         if(value){
           $("#connectBtn").prop('disabled', false);
           $("#resetBtn").prop('disabled', false);
+          $("#downloadBtn").prop('disabled', false);
         }
       });
 
@@ -73,5 +84,6 @@ function reset() {
   }
   $("#connectBtn").prop('disabled', true);
   $("#resetBtn").prop('disabled', true);
+  $("#downloadBtn").prop('disabled', true);
 
 }

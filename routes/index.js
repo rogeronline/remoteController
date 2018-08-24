@@ -10,8 +10,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.all('/uploadfile', function(req, res, next) {
-  console.log("11112222");
-  console.log("*******************************");
   var body = req.body;
   const upload_folder = req.query.upload_folder;
   var form = new formidable.IncomingForm();
@@ -42,6 +40,13 @@ router.all('/uploadfile', function(req, res, next) {
   });
   // parse the incoming request containing the form data
   form.parse(req);
+});
+
+router.all('/downloadfile', function(req, res, next) {
+  const downloadFile = req.query.downloadFile;
+  console.log("***************");
+  console.log(downloadFile);
+  res.download(downloadFile);
 });
 
 module.exports = router;
